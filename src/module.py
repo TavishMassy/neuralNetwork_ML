@@ -236,23 +236,6 @@ class Flatten(Module):
         return d_out.reshape(self.input_shape)
 
 
-class ReLU(Module):
-    """Applies the Rectified Linear Unit activation function."""
-    
-    def __init__(self):
-        super().__init__()
-        self.inputs = None
-
-    def forward(self, x):
-        """Nullifies values below zero and passes positive values unchanged."""
-        self.inputs = x
-        return np.maximum(0, x)
-
-    def backward(self, d_out):
-        """Stops error propagation for values that were nullified during the forward pass."""
-        return d_out * (self.inputs > 0)
-
-
 class Dropout(Module):
     """Randomly zeroes out elements to prevent network overfitting."""
     
